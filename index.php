@@ -13,9 +13,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://localhost/cdn/bootstrap/4.2.1/css/bootstrap.min.css">
-    <script src="https://localhost/cdn/jquery/jquery.min.js"></script>
-    <script src="https://localhost/cdn/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../cdn/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="../cdn/jquery/jquery.min.js"></script>
+    <script src="../cdn/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <title>Student Registration</title>
 </head>
 <body onload="getThenumber()">
@@ -31,24 +31,26 @@
             <li>Register only to one slot</li>
             <li>Any problems? Write a message to <span class="text-danger">weberb@csc.liv.ac.uk</span></li>
         </ul>
+            <div id="checkiffull"></div>
+
         <form action="" method="post" onsubmit="return checkSlots('deny')">
             <div id="response"></div>
             <div class="row">
             <div class="col-3">
                 <label>Name</label><br/>
-                <input class="form-control" type="text" id="name" required>
+                <input class="form-control" type="text" id="name" required placeholder="Full name">
             </div>
             <div class="col-3">
                 <label>Firstname</label>
-                <input class="form-control" type="text" id="fname" required>
+                <input class="form-control" type="text" id="fname" required placeholder="First Name">
             </div>
             <div class="col-3">
                 <label>SID</label>
-                <input class="form-control" type="text" id="sid" required>
+                <input class="form-control" type="text" id="sid" required placeholder="Student ID">
             </div>
             <div class="col-3">
                 <label>Email Address</label>
-                <input class="form-control" type="text" id="email" required>
+                <input class="form-control" type="text" id="email" required placeholder="Email Address">
             </div>
             </div>
             <br/>
@@ -64,11 +66,26 @@
 </div>
 </div>
 <script>
+    function checkiffull() {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById('checkiffull').innerHTML = this.response;
+            }
+        };
+        xmlhttp.open("POST", "checkiffull.php", true);
+        xmlhttp.send();
+    }
     function getThenumber() {
+        checkiffull();
+        let chosen = document.getElementById('optionsHere').value;
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 document.getElementById('optionsHere').innerHTML = this.response;
+                if(chosen!=='') {
+                    document.getElementById('optionsHere').value = chosen;
+                }
             }
         };
         xmlhttp.open("POST", "check.php", true);
@@ -85,6 +102,7 @@
         xmlhttp2.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 document.getElementById('response').innerHTML = this.response;
+                getThenumber();
             }
         };
             xmlhttp2.setRequestHeader('X-Requested-With', 'XMLHttpRequest');

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Karim K. Kanji
- * Date: 07/02/2019
- * Time: 07:25
+ * Date: 13/02/2019
+ * Time: 09:47
  */
 $conn=new mysqli("localhost","root","","comp519");
 
@@ -22,13 +22,7 @@ if ($result->num_rows > 0) {
     echo "<option>Select one</option>";
     while($row = $result->fetch_assoc()){
         $remaining = 8-$row['count'];
-        if($remaining<1){
-            $error = "disabled class='text-danger'";
-        }
-        else{
-            $error="";
-        }
-        echo "<option $error value=".$row['id'].">".$row['day']."&nbsp;".$row['time']."&nbsp;".$remaining." spaces remaining</option>";
+        echo "<option value=".$row['id'].">".$row['day']."&nbsp;".$row['time']."&nbsp;".$remaining." spaces remaining</option>";
     }
 } else {
     echo 2;

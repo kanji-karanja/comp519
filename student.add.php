@@ -30,7 +30,7 @@ set_error_handler("unableToConnect");
             $sqlu1 = "UPDATE `slots` SET count=count+1 WHERE `id` = '$slot'";
             $sqlu2 = "UPDATE `slots` SET count=count-1 WHERE `id` = '$oldsid'";
             if ($conn->query($sqlu) === TRUE && $conn->query($sqlu1) === TRUE && $conn->query($sqlu2) === TRUE) {
-                echo "<div class='alert alert-success'><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Hi, " . $fname . " have successfully <b>changed your</b> slot</div><script>getThenumber();</script>";
+                echo "<div class='alert alert-success'><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Hi, " . $fname . " , you have successfully <b>changed your</b> slot</div>";
             }
        }
         }
@@ -44,7 +44,7 @@ set_error_handler("unableToConnect");
             $sql2 = "UPDATE slots SET count=count+1 WHERE id='$slot'";
 
             if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-                echo "<div class='alert alert-success'><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Hi, " . $fname . " have successfully selected a slot</div><script>getThenumber();</script>";
+                echo "<div class='alert alert-success'><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Hi, " . $fname . ", you have successfully selected a slot</div>";
             } else {
                 echo "<div class='alert alert-danger'><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>An error occurred:" . $conn->error . "</div>";
             }
